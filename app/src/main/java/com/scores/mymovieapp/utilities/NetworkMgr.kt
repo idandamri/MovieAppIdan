@@ -15,7 +15,7 @@ class NetworkMgr {
         private var gson: Gson = Gson()
         val MOVIE_URL = "https://api.androidhive.info/json/movies.json"
         val NETWORK_TAG = "network_tag"
-        val queue = Volley.newRequestQueue(MainActivity.getContext())
+        val queue = Volley.newRequestQueue(Utils.getContext())
 
         fun request(requestSuccessfulListener: IonRequestCompleted, url : String) {
             try {
@@ -25,7 +25,7 @@ class NetworkMgr {
                         requestSuccessfulListener.parseJsonString(response)
                     },
                     Response.ErrorListener {
-                        Toast.makeText(MainActivity.getContext(),"Error in request", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(Utils.getContext(),"Error in request", Toast.LENGTH_SHORT).show()
                     })
                 stringRequest.tag = NETWORK_TAG
                 queue.add(stringRequest)

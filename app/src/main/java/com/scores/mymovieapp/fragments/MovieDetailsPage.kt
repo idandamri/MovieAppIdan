@@ -56,31 +56,32 @@ class MovieDetailsPage : Fragment(), View.OnClickListener {
             val value = arguments?.getSerializable(DATA_TAG) as Movie
             titleTv.text = value.title
             val sb = StringBuilder()
-            sb.append(MainActivity.getContext().resources.getString(R.string.rating_is))
+            sb.append(Utils.getContext().resources.getString(R.string.rating_is))
             sb.append(" ")
             sb.append(value.rating.toString())
             ratingTv.text = sb.toString()
             yearTv.text = value.releaseYear
-            val genreTitleTv = TextView(MainActivity.getContext())
+            val genreTitleTv = TextView(Utils.getContext())
             sb.setLength(0)
             if (value.genre?.size == 1) {
-                sb.append(MainActivity.getContext().resources.getString(R.string.genre_is))
+                sb.append(Utils.getContext().resources.getString(R.string.genre_is))
             }
             else if(value.genre?.size!! > 1) {
-                sb.append(MainActivity.getContext().resources.getString(R.string.genre_are))
+                sb.append(Utils.getContext().resources.getString(R.string.genre_are))
             }
             sb.append(" ")
             genreTitleTv.text = sb.toString()
-            genreTitleTv.setTextColor(MainActivity.getContext().resources.getColor(R.color.mainTextColor, MainActivity.getContext().resources.newTheme()))
+            genreTitleTv.setTextColor(Utils.getContext().resources.getColor(R.color.mainTextColor, Utils.getContext().resources.newTheme()))
             genreLl.addView(genreTitleTv)
             Utils.addGenreToLinearLayout(genreLl, value)
-            Glide.with(MainActivity.getContext())
+            Glide.with(Utils.getContext())
                 .load(value.image)
+                .placeholder(R.drawable.ic_baseline_star)
                 .into(mainIv)
-            Glide.with(MainActivity.getContext())
+            Glide.with(Utils.getContext())
                 .load("https://media.giphy.com/media/8lKyuiFprZaj2lC3WN/giphy.gif")
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .centerCrop()
+                .centerInside()
                 .into(gifIv)
         } catch (e: Exception) {
             e.printStackTrace()

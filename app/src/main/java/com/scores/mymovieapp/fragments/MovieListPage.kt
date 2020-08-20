@@ -113,7 +113,7 @@ class MovieListPage : BaseListFragment() , OnRecyclerViewItemClickListenerScreen
 
     private fun openQrCodeReader() {
         try {
-            val readerIntent = Intent(MainActivity.getContext(),QrCodeReaderActivity::class.java)
+            val readerIntent = Intent(Utils.getContext(),QrCodeReaderActivity::class.java)
             activity?.startActivityForResult(readerIntent, QR_REQUEST_CODE)
         } catch (e: Exception) {
             e.printStackTrace()

@@ -5,6 +5,6 @@
     <string name="genre_is">Genre is:</string>
     <string name="genre_are">Genres are:</string>
     <string name="add_movie">Add movie</string>
-    <string name="movie_permission_asking_string">You Should approve the permission for the camera to enjoy the QR code reader, please press "Allow"</string>
+    <string name="movie_permission_asking_string"></string>
     <string name="movie_in_db">Current movie already exist in the Database</string>
 </resources>

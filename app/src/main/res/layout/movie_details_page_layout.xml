@@ -9,6 +9,8 @@
             android:id="@+id/details_iv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorExtra"
+            android:src="@drawable/ic_baseline_star"
             android:minHeight="200dp"
             android:scaleType="center"
             android:adjustViewBounds="true"
@@ -45,7 +47,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/ic_baseline_star_24"
+            android:src="@drawable/ic_baseline_star"
             app:layout_constraintStart_toStartOf="@+id/item_genre_ll"
             app:layout_constraintTop_toBottomOf="@+id/item_genre_ll" />
 

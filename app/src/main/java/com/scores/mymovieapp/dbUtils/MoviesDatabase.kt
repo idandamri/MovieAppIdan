@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.scores.mymovieapp.activities.MainActivity
+import com.scores.mymovieapp.utilities.Utils
 
 @Database(entities = [Movie::class], version = 1, exportSchema = false)
 @TypeConverters(ListConverter::class)
@@ -16,7 +17,7 @@ abstract class MoviesDatabase : RoomDatabase(){
         fun getDataBase(): MoviesDatabase? {
             if (INSTANCE == null){
                 synchronized(MoviesDatabase::class){
-                    INSTANCE = Room.databaseBuilder(MainActivity.getContext().applicationContext, MoviesDatabase::class.java, "moviesDB").build()
+                    INSTANCE = Room.databaseBuilder(Utils.getContext().applicationContext, MoviesDatabase::class.java, "moviesDB").build()
                 }
             }
             return INSTANCE

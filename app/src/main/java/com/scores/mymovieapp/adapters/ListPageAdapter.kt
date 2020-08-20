@@ -50,7 +50,7 @@ class ListPageAdapter (private var onRecyclerViewItemClickListenerScreen : OnRec
 
                 Glide.with(itemView.context)
                     .load(value.image)
-                    .placeholder(R.drawable.ic_baseline_star_24)
+                    .placeholder(R.drawable.ic_baseline_star)
                     .into(itemView.movie_item_iv)
                 itemView.setOnClickListener {
                     onRecyclerViewItemClickListenerScreen.onRecyclerViewItemClicked(value)
