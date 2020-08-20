@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:autoFocusButtonColor="@android:color/white"
-        app:autoFocusButtonVisible="true"
+        app:autoFocusButtonVisible="false"
         app:flashButtonColor="@android:color/white"
         app:flashButtonVisible="true"
         app:frameAspectRatioHeight="1"
@@ -22,4 +22,14 @@
         app:frameSize="0.75"
         app:frameThickness="2dp"
         app:maskColor="#77000000" />
+
+    <ImageView
+        android:id="@+id/details_back_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_baseline_arrow_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

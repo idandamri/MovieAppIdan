@@ -55,6 +55,14 @@ class MovieListPage : BaseListFragment() , OnRecyclerViewItemClickListenerScreen
         btnAdd.setOnTouchListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(activity?.intent != null && activity is MainActivity){
+            (activity as MainActivity).handleCallbackFromQrReader()
+            activity?.intent?.removeExtra(Utils.DATA_FROM_SCAN)
+        }
+    }
+
     override fun handleAdapterWithData() {
         try {
             if (recyclerView.adapter == null) {
@@ -113,8 +121,7 @@ class MovieListPage : BaseListFragment() , OnRecyclerViewItemClickListenerScreen
 
     private fun openQrCodeReader() {
         try {
-            val readerIntent = Intent(Utils.getContext(),QrCodeReaderActivity::class.java)
-            activity?.startActivityForResult(readerIntent, QR_REQUEST_CODE)
+            (activity as MainActivity).requestPermission()
         } catch (e: Exception) {
             e.printStackTrace()
         }

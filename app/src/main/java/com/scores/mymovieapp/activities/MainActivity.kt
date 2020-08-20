@@ -20,6 +20,7 @@ import com.scores.mymovieapp.R
 import com.scores.mymovieapp.dbUtils.Movie
 import com.scores.mymovieapp.fragments.MovieDetailsPage
 import com.scores.mymovieapp.fragments.MovieListPage
+import com.scores.mymovieapp.fragments.QrCodeReaderFragment
 import com.scores.mymovieapp.interfaces.INavigateToNextScreen
 import com.scores.mymovieapp.utilities.DbManager
 import com.scores.mymovieapp.utilities.EmovieNavigationType
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity(), INavigateToNextScreen{
 
     companion object{
         private const val DETAILS: String = "DetailsPage"
-        private const val MOVIE: String = "MoviePage"
+        private const val QR_CODE: String = "QrCode"
         private val PERMISSION_REQUEST_CODE: Int = 202
         private const val movie_permission_asking_string: String = "You Should approve the permission for the camera to enjoy the QR code reader, " +
                 "\nplease press \"Allow\".\n\nIf you pressed \"DENY & DON\'T ASK AGAIN\" please press \"CANCLE\" and change the permission " +
@@ -85,10 +86,10 @@ class MainActivity : AppCompatActivity(), INavigateToNextScreen{
         try {
             when(type) {
                 EmovieNavigationType.FROM_DETAILS_TO_QR -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-//                        .replace(frameLayout.id, MovieListPage.newInstance())
-//                        .addToBackStack(MOVIE).commit()
+                    supportFragmentManager.beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .replace(frameLayout.id, QrCodeReaderFragment.newInstance())
+                        .addToBackStack(QR_CODE).commit()
                 }
                 EmovieNavigationType.FROM_LIST_PAGE_TO_DETAILS -> {
                     supportFragmentManager.beginTransaction()
@@ -105,19 +106,23 @@ class MainActivity : AppCompatActivity(), INavigateToNextScreen{
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == MovieListPage.QR_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            try {
-                val scanString = data?.getStringExtra(Utils.DATA_FROM_SCAN)
-                val movie = NetworkMgr.getGson().fromJson<Movie>(scanString, Movie::class.java)
-                DbManager.addMovieToDb(movie, this)
-                refreshPage()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            handleCallbackFromQrReader()
         }
         else if(requestCode == MovieListPage.QR_REQUEST_CODE && resultCode == Activity.RESULT_CANCELED
             && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED){
             requestPermission()
+        }
+    }
+
+    fun handleCallbackFromQrReader() {
+        try {
+            val scanString = intent.getStringExtra(Utils.DATA_FROM_SCAN)
+            val movie = NetworkMgr.getGson().fromJson<Movie>(scanString, Movie::class.java)
+            DbManager.addMovieToDb(movie, this)
+            refreshPage()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -132,7 +137,7 @@ class MainActivity : AppCompatActivity(), INavigateToNextScreen{
         }
     }
 
-    private fun requestPermission() {
+    fun requestPermission() {
         try {
             requestPermissions(
                 arrayOf(Manifest.permission.CAMERA),
@@ -153,10 +158,7 @@ class MainActivity : AppCompatActivity(), INavigateToNextScreen{
             when (requestCode) {
                 PERMISSION_REQUEST_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     try {
-                        val readerIntent = Intent(Utils.getContext(),QrCodeReaderActivity::class.java)
-                        startActivityForResult(readerIntent,
-                            MovieListPage.QR_REQUEST_CODE
-                        )
+                        navigateToNextScreen(EmovieNavigationType.FROM_DETAILS_TO_QR, null)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }

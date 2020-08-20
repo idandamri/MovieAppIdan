@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.scores.mymovieapp.R
-import com.scores.mymovieapp.activities.MainActivity
 import com.scores.mymovieapp.dbUtils.Movie
 import com.scores.mymovieapp.utilities.Utils
 import java.lang.StringBuilder
@@ -90,13 +89,13 @@ class MovieDetailsPage : Fragment(), View.OnClickListener {
 
     private fun initViews(view: View?) {
         mainIv = view?.findViewById(R.id.details_iv)!!
-        backIv = view.findViewById(R.id.details_back_iv)!!
         gifIv = view.findViewById(R.id.details_gif_iv)!!
         titleTv = view.findViewById(R.id.details_title_tv)
         ratingTv = view.findViewById(R.id.details_rating_tv)
         genreLl = view.findViewById(R.id.item_genre_ll)
         yearTv = view.findViewById(R.id.details_year_tv)
 
+        backIv = view.findViewById(R.id.details_back_iv)!!
         backIv.setOnClickListener(this)
     }
 

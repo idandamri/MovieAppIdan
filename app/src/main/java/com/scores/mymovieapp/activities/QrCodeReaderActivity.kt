@@ -16,7 +16,7 @@ class QrCodeReaderActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_qr_code_reader)
+        setContentView(R.layout.qr_code_reader_layout)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         if(Utils.checkAndroidVersionAndPermissionIsGranted()){
