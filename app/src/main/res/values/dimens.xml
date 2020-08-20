@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_margin">3dp</dimen>
+    <dimen name="item_text_margin">2dp</dimen>
+    <dimen name="item_image_padding">3dp</dimen>
+    <dimen name="details_margin_ll">20dp</dimen>
+</resources>
