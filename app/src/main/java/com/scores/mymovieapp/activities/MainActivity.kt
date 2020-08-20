@@ -54,8 +54,10 @@ class MainActivity : AppCompatActivity(), INavigateToNextScreen{
         private const val DETAILS: String = "DetailsPage"
         private const val QR_CODE: String = "QrCode"
         private val PERMISSION_REQUEST_CODE: Int = 202
-        private const val movie_permission_asking_string: String = "You Should approve the permission for the camera to enjoy the QR code reader, " +
-                "\nplease press \"Allow\".\n\nIf you pressed \"DENY & DON\'T ASK AGAIN\" please press \"CANCLE\" and change the permission " +
+        private const val movie_permission_asking_string: String = "You Should approve the permission " +
+                "for the camera to enjoy the QR code reader, " +
+                "\nplease press \"Allow\".\n\nIf you pressed \"DENY " +
+                "& DON\'T ASK AGAIN\" before please press \"CANCLE\" and change the permission " +
                 "trough the apps \"Settings\" menu."
     }
 
